@@ -1,0 +1,20 @@
+<h1> WELCOME TO THE SQUID GOATS </h1>
+
+<p> You have found <%= @goats %> goats in <%= @goats + @squids %> guesses </p>
+
+<p>
+    <%= 
+        case @status do
+            :ready_to_guess ->  "Make a guess!"
+            :guess_correct -> "You got the GOAT!"
+            :guess_wrong -> "soz you got a squid."
+            :game_over -> "GAME OVER! You used all your guesses."
+            _ -> "default msg"
+        end
+    %>
+</p>
+<div style="display:flex" >
+    <%= for {animal, index} <- Enum.with_index(@doors) do %>
+            <.door status={@status} animal={animal} index={index}  />
+    <% end %>
+</div>
